@@ -1,0 +1,3 @@
+pip install req1
+pip install req2
+pip install req3

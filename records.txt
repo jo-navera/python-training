@@ -1,0 +1,10 @@
+001Smith               Johnson              19821115Developer
+002Garcia              Patricia             19900723Manager   
+003Williams            Robert               19950409Analyst   
+004Brown               Michelle             19880614Technician
+005Jones               David                19920211Designer  
+006Martinez            Angela               19880506Developer
+007Rodriguez           Thomas               19960830Manager   
+008Lee                 Jennifer             19791203Analyst   
+009Taylor              Christopher          19850422Technician
+010Anderson            Sarah                19910918Designer  
