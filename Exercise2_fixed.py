@@ -78,6 +78,8 @@ def main():
         process_line(line, line_number)
         line_number += 1
 
+def func():
+    return
 
 def process_line(line: str, line_number: int):
     record = parse_line(line)
