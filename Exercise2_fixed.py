@@ -51,12 +51,12 @@ import argparse
 
 
 class PersonRecord:
-    def __init__(self, id, last_name, first_name, birthdate, role):
+    def __init__(self, id, last_name, first_name, birthdate, hiredate):
         self.id = id
         self.last_name = last_name
         self.first_name = first_name
         self.birthdate = birthdate
-        self.role = role
+        self.hiredate = hiredate
 
     def __repr__(self):
         return (
