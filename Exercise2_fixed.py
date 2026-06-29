@@ -44,19 +44,29 @@
 # First Name: Sarah
 # Birthdate: 19910918
 # Role: Designer
-
+# add description
 
 from pathlib import Path
 import argparse
 
 
 class PersonRecord:
+<<<<<<< HEAD
     def __init__(self, id, last_name, first_name, birthdate, hiredate):
+=======
+    def __init__(self, id, last_name, first_name, birthdate, role, hiredate, lastdate):
+>>>>>>> main
         self.id = id
         self.last_name = last_name
         self.first_name = first_name
         self.birthdate = birthdate
+<<<<<<< HEAD
         self.hiredate = hiredate
+=======
+        self.role = role
+        self.hiredate = hiredate
+        self.lastdate = lastdate
+>>>>>>> main
 
     def __repr__(self):
         return (
@@ -65,7 +75,9 @@ class PersonRecord:
             f"last_name='{self.last_name}', "
             f"first_name='{self.first_name}', "
             f"birthdate={self.birthdate}, "
-            f"role='{self.role}')"
+            f"role='{self.role}', "
+            f"hiredate={self.hiredate}",
+            f"lastdate={self.lastdate}"
         )
 
 
