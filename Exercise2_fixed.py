@@ -68,7 +68,7 @@ class PersonRecord:
             f"first_name='{self.first_name}', "
             f"birthdate={self.birthdate}, "
             f"role='{self.role}', "
-            f"hiredate={self.hiredate},
+            f"hiredate={self.hiredate}",
             f"lastdate={self.lastdate}"
         )
 
