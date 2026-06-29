@@ -1,3 +1,8 @@
+#Feature 1: change saved filename to include rigname "rigname.docx"
+#Feature 2: change process_paragraphs to replace placeholder text with the corresponding value from the datarow
+#Feature 3: change process_tables to replace placeholder text with the corresponding value from the datarow
+#Feature 4: change parse_arguments to accept command line arguments for source file and template file
+
 import pandas as pd
 import argparse
 import docx
@@ -7,16 +12,12 @@ from docx.oxml.ns import qn
 
 
 def parse_arguments():
-    parser = argparse.ArgumentParser()
-    parser.add_argument("--source", help="Name of the source file to load")
-    parser.add_argument("--template", help="Name of the template file to load")
-    args = parser.parse_args()
-    return args.source, args.template
+    return "ExcelToTemplate\Source.xlsx", "ExcelToTemplate\Template - Copy.docx"
 
 
 def checkedElement():
     elm = OxmlElement('w:checked')
-    elm.set(qn('w:val'), "true")
+    elm.set(qn('w:val'), "true")    
     return elm
 
 
@@ -56,9 +57,8 @@ def process_paragraphs(datarow, template):
     # Process the paragraphs in the template and fill them with the data from the datarow
     for paragraph in template.paragraphs:
         for key, value in datarow.items():
-            if f"<<{key.upper()}>>" in paragraph.text:
-                paragraph.text = paragraph.text.replace(
-                    f"<<{key.upper()}>>", str(value))
+            paragraph.text = value
+            
     return template
 
 
@@ -68,9 +68,7 @@ def process_tables(datarow, template):
         for row in table.rows:
             for cell in row.cells:
                 for key, value in datarow.items():
-                    if f"<<{key.upper()}>>" in cell.text:
-                        cell.text = cell.text.replace(
-                            f"<<{key.upper()}>>", str(value))
+                   cell.text = value
     return template
 
 
@@ -92,8 +90,6 @@ def process_data(data, template):
 def handle_checkboxes(template):
     doc = template
 
-    # 1. Handle Legacy Form Checkboxes (<w:checkBox>)
-    # Find all legacy checkbox elements using XPath
     legacy_boxes = doc._element.xpath('.//w:checkBox')
     for box in legacy_boxes:
         # Check if <w:checked> element already exists
@@ -110,8 +106,7 @@ def handle_checkboxes(template):
 
 
 if __name__ == "__main__":
-    # source_file, template_file = parse_arguments()
-    source_file, template_file = "ExcelToTemplate\Source.xlsx", "ExcelToTemplate\Template - Copy.docx"
+    source_file, template_file = parse_arguments()
     loaded_df = load_spreadsheet(source_file)
     processed_data = arrange_data_for_processing(loaded_df)
     loaded_template = load_template(template_file)
