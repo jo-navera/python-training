@@ -1,73 +1,11 @@
-# Run this exercise with the following command:
-# python Exercise2.py --file "recordsad.txt"
-# Modify the code to validate the records in the file and print an error message for any invalid records.
-# The error message should indicate which row the error occurred in and what the error is.
-# The code should also print a message for valid records.
-# Expected output with the above command:
-# Line 1 is valid!
-# ID: 001
-# Last Name: Smith
-# First Name: Johnson
-# Birthdate: 19821115
-# Role: Developer
-# Error on Line 2: Invalid ID: 0x2
-# Error on Line 3: Invalid Birthdate:  1995040
-# Error on Line 4: Invalid Birthdate:  1988061
-# Line 5 is valid!
-# ID: 005
-# Last Name: Jones
-# First Name: David
-# Birthdate: 19920211
-# Role: Designer
-# Error on Line 6: Role cannot be empty.
-# Line 7 is valid!
-# ID: 007
-# Last Name: Rodriguez
-# First Name: Thomas
-# Birthdate: 19960830
-# Role: Manager
-# Line 8 is valid!
-# ID: 008
-# Last Name: Lee
-# First Name: Jennifer
-# Birthdate: 19791203
-# Role: Analyst
-# Line 9 is valid!
-# ID: 009
-# Last Name: Taylor
-# First Name: Christopher
-# Birthdate: 19850422
-# Role: Technician
-# Line 10 is valid!
-# ID: 010
-# Last Name: Anderson
-# First Name: Sarah
-# Birthdate: 19910918
-# Role: Designer
-
+#Feature 1: Add new validation for hiredate. It should be numerical and it should be 8 characters long. If not, return an error message "Invalid Hiredate: {hiredate}".
+#Feature 2: Add new validation for lastdate. It should be numerical and it should be 8 characters long. If not, return an error message "Invalid Lastdate: {lastdate}".
+#Feature 3: Add new validation for birthdate. Only 18 years old and above should be valid.
+#Feature 4: Add new validation to check last date should not be earlier than hire date.
 
 from pathlib import Path
 import argparse
-
-
-class PersonRecord:
-    def __init__(self, id, last_name, first_name, birthdate,  hiredate):
-        self.id = id
-        self.last_name = last_name
-        self.first_name = first_name
-        self.birthdate = birthdate
-        self.hiredate = hiredate
-
-    def __repr__(self):
-        return (
-            f"PersonRecord("
-            f"id={self.id}, "
-            f"last_name='{self.last_name}', "
-            f"first_name='{self.first_name}', "
-            f"birthdate={self.birthdate}, "
-            f"hiredate={self.hiredate}"
-        )
-
+from ObjectFolder.Objects import PersonRecord
 
 def main():
     file = parse_arguments()
@@ -121,7 +59,9 @@ def parse_line(line: str) -> PersonRecord:
         last_name=line[3:23],
         first_name=line[23:43],
         birthdate=line[44:52],
-        role=line[52:62]
+        role=line[52:62],
+        hiredate=line[62:70],
+        lastdate=line[70:78]    
     )
     return person_object
 
