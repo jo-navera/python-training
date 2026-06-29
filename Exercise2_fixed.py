@@ -100,7 +100,7 @@ def parse_arguments():
 
 def load_file(file: str):
     script_dir = Path(__file__).parent
-    file_name = file if file else 'records.txt'
+    file_name = file if file else 'records.txxxxt'
     file_path = script_dir / file_name
 
     with open(file_path, 'r') as file:
