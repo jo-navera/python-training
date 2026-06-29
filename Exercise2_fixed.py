@@ -1,7 +1,7 @@
-#Feature 1: Add new validation for hiredate. It should be numerical and it should be 8 characters long. If not, return an error message "Invalid Hiredate: {hiredate}".
-#Feature 2: Add new validation for lastdate. It should be numerical and it should be 8 characters long. If not, return an error message "Invalid Lastdate: {lastdate}".
-#Feature 3: Add new validation for birthdate. Only 18 years old and above should be valid.
-#Feature 4: Add new validation to check last date should not be earlier than hire date.
+#Feature 1 (Dex): Add new validation for hiredate. It should be numerical and it should be 8 characters long. If not, return an error message "Invalid Hiredate: {hiredate}".
+#Feature 2 (Rachelle): Add new validation for lastdate. It should be numerical and it should be 8 characters long. If not, return an error message "Invalid Lastdate: {lastdate}".
+#Feature 3 (Roselyn): Add new validation for birthdate. Only 18 years old and above should be valid.
+#Feature 4 (Jayson): Add new validation to check last date should not be earlier than hire date.
 
 from pathlib import Path
 import argparse
