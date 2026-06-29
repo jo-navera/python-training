@@ -98,6 +98,7 @@ def handle_checkboxes(template):
     for box in legacy_boxes:
         # Check if <w:checked> element already exists
         checked_el = box.find(qn('w:checked'))
+
         if checked_el is not None:
             checked_el.set(qn('w:val'), '1')  # '1' or 'true' means checked
         else:
@@ -105,17 +106,6 @@ def handle_checkboxes(template):
             new_checked = docx.oxml.shared.OxmlElement('w:checked')
             new_checked.set(qn('w:val'), '1')
             box.append(new_checked)
-
-    # 2. Handle Modern Content Control Checkboxes (<w14:checkbox>)
-    # modern_boxes = doc._element.xpath('.//w14:checkbox')
-    # for box in modern_boxes:
-    #     checked_el = box.find(qn('w14:checked'))
-    #     if checked_el is not None:
-    #         checked_el.set(qn('w14:val'), '1')
-    #     else:
-    #         new_checked = docx.oxml.shared.OxmlElement('w14:checked')
-    #         new_checked.set(qn('w14:val'), '1')
-    #         box.append(new_checked)
     return template
 
 
