@@ -6,6 +6,7 @@
 from pathlib import Path
 import argparse
 from ObjectFolder.Objects import PersonRecord
+from datetime import date
 
 def main():
     file = parse_arguments()
