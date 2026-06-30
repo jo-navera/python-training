@@ -74,6 +74,8 @@ def validate_record(record: PersonRecord) -> str:
         error_message = f"Invalid Birthdate: {record.birthdate}"
     if not record.role:
         error_message = "Role cannot be empty."
+    if not record.lastdate.isdigit() or len(record.lastdate) != 8:
+        error_message = f"Invalid LastDate: {record.lastdate}"
     return error_message
 
 
