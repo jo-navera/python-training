@@ -1,11 +1,12 @@
-#Feature 1: Add new validation for hiredate. It should be numerical and it should be 8 characters long. If not, return an error message "Invalid Hiredate: {hiredate}".
-#Feature 2: Add new validation for lastdate. It should be numerical and it should be 8 characters long. If not, return an error message "Invalid Lastdate: {lastdate}".
-#Feature 3: Add new validation for birthdate. Only 18 years old and above should be valid.
-#Feature 4: Add new validation to check last date should not be earlier than hire date.
+#Feature 1 (Dex): Add new validation for hiredate. It should be numerical and it should be 8 characters long. If not, return an error message "Invalid Hiredate: {hiredate}".
+#Feature 2 (Rachelle): Add new validation for lastdate. It should be numerical and it should be 8 characters long. If not, return an error message "Invalid Lastdate: {lastdate}".
+#Feature 3 (Roselyn): Add new validation for birthdate. Only 18 years old and above should be valid.
+#Feature 4 (Jayson): Add new validation to check last date should not be earlier than hire date.
 
 from pathlib import Path
 import argparse
 from ObjectFolder.Objects import PersonRecord
+from datetime import date
 
 def main():
     file = parse_arguments()
@@ -26,7 +27,7 @@ def process_line(line: str, line_number: int):
         print(f"Error on Line {line_number}: {error}")
     else:
         print(f"Line {line_number} is valid!")
-        print_record(record)
+    print_record(record)
 
 
 def parse_arguments():
@@ -51,6 +52,8 @@ def print_record(record: PersonRecord):
     print(f"Name: {record.first_name.strip()} {record.last_name.strip()}")
     print(f"Birthdate: {record.birthdate}")
     print(f"Role: {record.role}")
+    print(f"Start: {record.hiredate}")
+    print(f"End: {record.lastdate}")
 
 
 def parse_line(line: str) -> PersonRecord:
@@ -68,6 +71,13 @@ def parse_line(line: str) -> PersonRecord:
 
 def validate_record(record: PersonRecord) -> str:
     error_message = ""
+    birthdate = date.strptime(record.birthdate, "%Y%m%d")
+    datetoday = date.today()
+    age = datetoday.year - birthdate.year
+    if (datetoday.month, datetoday.day) < (birthdate.month, birthdate.day):
+            age -= 1
+
+    print(f"Age: {age}")
     if not record.id.isdigit():
         error_message = f"Invalid ID: {record.id}"
     if not record.birthdate.isdigit() or len(record.birthdate) != 8:
@@ -76,8 +86,20 @@ def validate_record(record: PersonRecord) -> str:
         error_message = "Role cannot be empty."
     if not record.lastdate.isdigit() or len(record.lastdate) != 8:
         error_message = f"Invalid LastDate: {record.lastdate}"
+    #validate start date
+    if not convert_date(record.hiredate) < convert_date(record.lastdate):
+        error_message = "Start date is later than last date."
+        # Feature 1 (Dex): Hiredate validation_30June
+    if not record.hiredate.isdigit() or len(record.hiredate) != 8:
+        error_message = f"Invalid Hiredate: {record.hiredate}"
     return error_message
 
+
+def convert_date(input_date):
+    converted_date = date.strptime(input_date, "%Y%m%d")
+    return converted_date
+
+    
 
 if __name__ == "__main__":
     main()
