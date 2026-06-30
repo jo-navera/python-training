@@ -80,16 +80,22 @@ def validate_record(record: PersonRecord) -> str:
     print(f"Age: {age}")
     if not record.id.isdigit():
         error_message = f"Invalid ID: {record.id}"
-    if not record.birthdate.isdigit() or len(record.birthdate) != 8:
+    elif not record.birthdate.isdigit() or len(record.birthdate) != 8:
         error_message = f"Invalid Birthdate: {record.birthdate}"
-    if not record.role:
+    elif not record.role:
         error_message = "Role cannot be empty."
+    elif not record.hiredate.isdigit() or len(record.hiredate) != 8:
+        error_message = f"Invalid Hiredate: {record.hiredate}"
+    elif not record.lastdate.isdigit() or len(record.lastdate) != 8:
+        error_message = f"Invalid LastDate: {record.lastdate}"
     #validate start date
-    if not convert_date(record.hiredate) < convert_date(record.lastdate):
+    elif not convert_date(record.hiredate) < convert_date(record.lastdate):
         error_message = "Start date is later than last date."
         # Feature 1 (Dex): Hiredate validation_30June
-    if not record.hiredate.isdigit() or len(record.hiredate) != 8:
+    elif not record.hiredate.isdigit() or len(record.hiredate) != 8:
         error_message = f"Invalid Hiredate: {record.hiredate}"
+    elif age < 18:
+        error_message = f"Invalid age: {age}"
     return error_message
 
 
