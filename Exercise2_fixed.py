@@ -6,7 +6,6 @@
 from pathlib import Path
 import argparse
 from ObjectFolder.Objects import PersonRecord
-from datetime import date
 
 def main():
     file = parse_arguments()
@@ -51,7 +50,7 @@ def print_record(record: PersonRecord):
     print(f"ID: {record.id}")
     print(f"Name: {record.first_name.strip()} {record.last_name.strip()}")
     print(f"Birthdate: {record.birthdate}")
-    #print(f"Role: {record.role}")
+    print(f"Role: {record.role}")
 
 
 def parse_line(line: str) -> PersonRecord:
@@ -60,7 +59,7 @@ def parse_line(line: str) -> PersonRecord:
         last_name=line[3:23],
         first_name=line[23:43],
         birthdate=line[44:52],
-        #role=line[52:62],
+        role=line[52:62],
         hiredate=line[62:70],
         lastdate=line[70:78]    
     )
@@ -69,19 +68,12 @@ def parse_line(line: str) -> PersonRecord:
 
 def validate_record(record: PersonRecord) -> str:
     error_message = ""
-    birthdate = date.strptime(record.birthdate, "%Y%m%d")
-    datetoday = date.today()
-    age = datetoday.year - birthdate.year
-    if (datetoday.month/datetoday.day) < (birthdate.month/birthdate.day):
-            age -= 1
-
-    print(f"Age: {age} test: {datetoday.month/datetoday.day}")
     if not record.id.isdigit():
         error_message = f"Invalid ID: {record.id}"
     if not record.birthdate.isdigit() or len(record.birthdate) != 8:
         error_message = f"Invalid Birthdate: {record.birthdate}"
-    if age < 18:
-        error_message = f"Invalid age: {age}"
+    if not record.role:
+        error_message = "Role cannot be empty."
     return error_message
 
 
