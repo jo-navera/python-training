@@ -1,10 +1,10 @@
 001Smith               Johnson              19821115Developer 2026010220260103
 002Garcia              Patricia             19900723Manager   2026010220260103
-003Williams            Robert               19950409Analyst   
-004Brown               Michelle             19880614Technician
-005Jones               David                19920211Designer  
-006Martinez            Angela               19880506Developer
-007Rodriguez           Thomas               19960830Manager   
-008Lee                 Jennifer             19791203Analyst   
-009Taylor              Christopher          19850422Technician
-010Anderson            Sarah                19910918Designer  
+003Williams            Robert               19950409Analyst   2026010520260131
+004Brown               Michelle             19880614Technician2026010520260131
+005Jones               David                19920211Designer  2026010520260131
+006Martinez            Angela               19880506Developer 2026010520260131
+007Rodriguez           Thomas               19960830Manager   2026010520260131
+008Lee                 Jennifer             19791203Analyst   2026010520260131
+009Taylor              Christopher          19850422Technician2026010520260131
+010Anderson            Sarah                19910918Designer  2026020520260131
