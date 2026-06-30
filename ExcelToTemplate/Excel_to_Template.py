@@ -1,8 +1,8 @@
-# Feature 1: change saved filename to include rigname "rigname.docx"
-# Feature 2: change process_paragraphs to replace placeholder text with the corresponding value from the datarow
-# Feature 3: change process_tables to replace placeholder text with the corresponding value from the datarow
-# Feature 4: change parse_arguments to accept command line arguments for source file and template file
-# Feature 5: add code to handle <<date>> placeholder
+# Feature 1 (Dex): change saved filename to comply with file naming rules
+# Feature 2 (Rachelle): change process_paragraphs to replace placeholder text with the corresponding value from the datarow
+# Feature 3 (Roselyn): change process_tables to replace placeholder text with the corresponding value from the datarow
+# Feature 4 (): change parse_arguments to accept command line arguments for source file and template file
+# Feature 5 (Jayson): add code to handle <<date>> placeholder
 
 import pandas as pd
 import argparse
@@ -42,9 +42,9 @@ def load_template(file_path):
     return doc
 
 
-def arrange_data_for_processing(df):
+def arrange_data_for_processing(dataframes):
     # Arrange the data from the DataFrame into a list of dictionaries
-    data = df.to_dict(orient='records')
+    data = dataframes.to_dict(orient='records')
     data = [{k.upper(): v for k, v in d.items()} for d in data]
     return data
 
@@ -84,7 +84,6 @@ def process_tables(datarow, template_copy):
 
 def extract_keys(text):
     pattern = r"<<(.*?)>>"
-    regex = re.compile(pattern)
 
     return re.findall(pattern, text)
 
@@ -94,7 +93,7 @@ def save_filled_template(template_copy, output_file):
     template_copy.save(output_file)
 
 
-def process_data(data, template):
+def process_data(data, template_file):
     # Process all rows of data and fill the template with the data
     for i, datarow in enumerate(data):
         template = load_template(template_file)
@@ -161,7 +160,7 @@ def get_index_of_checkbox(key, value, cell_text):
 
 if __name__ == "__main__":
     source_file, template_file = parse_arguments()
-    loaded_df = load_spreadsheet(source_file)
-    arranged_datarows = arrange_data_for_processing(loaded_df)
+    loaded_dataframes = load_spreadsheet(source_file)
+    arranged_datarows = arrange_data_for_processing(loaded_dataframes)
 
     process_data(arranged_datarows, template_file)
