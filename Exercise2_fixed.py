@@ -72,10 +72,10 @@ def validate_record(record: PersonRecord) -> str:
     birthdate = date.strptime(record.birthdate, "%Y%m%d")
     datetoday = date.today()
     age = datetoday.year - birthdate.year
-    if (datetoday.month/datetoday.day) < (birthdate.month/birthdate.day):
+    if (datetoday.month, datetoday.day) < (birthdate.month, birthdate.day):
             age -= 1
 
-    print(f"Age: {age} test: {datetoday.month/datetoday.day}")
+    print(f"Age: {age}")
     if not record.id.isdigit():
         error_message = f"Invalid ID: {record.id}"
     if not record.birthdate.isdigit() or len(record.birthdate) != 8:
