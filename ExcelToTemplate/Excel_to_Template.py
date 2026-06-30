@@ -75,7 +75,11 @@ def process_tables(datarow, template_copy):
                 keys = extract_keys(cell.text)
                 if len(keys) > 0:
                     for key in keys:
-                        cell.text = cell.text
+                        if key in datarow and f"<<{key}>>" in cell.text:
+                            print(keys)
+                            print(datarow[key])
+                            print(cell.text)
+                            cell.text = cell.text.replace(f"<<{key}>>", str(datarow[key]))
                 else:
                     handle_checkboxes_in_cell(datarow, cell)
 
