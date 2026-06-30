@@ -138,8 +138,10 @@ def validate_record(record: PersonRecord) -> str:
         error_message = f"Invalid Birthdate: {record.birthdate}"
     if not record.role:
         error_message = "Role cannot be empty."
+    # Feature 1 (Dex): Hiredate validation
+    if not record.hiredate.isdigit() or len(record.hiredate) != 8:
+        error_message = f"Invalid Hiredate: {record.hiredate}"
     return error_message
-
 
 if __name__ == "__main__":
     main()
