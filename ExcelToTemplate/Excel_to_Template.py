@@ -119,6 +119,7 @@ def handle_checkboxes_in_cell(datarow, cell):
                         if checked_el is not None:
                             # '1' or 'true' means checked
                             checked_el.set(qn('w:val'), '1')
+                            box_found = True
                             break
                         else:
                             # Create and append a new <w:checked> tag if missing
@@ -126,7 +127,11 @@ def handle_checkboxes_in_cell(datarow, cell):
                                 'w:checked')
                             new_checked.set(qn('w:val'), '1')
                             box.append(new_checked)
+                            box_found = True
                             break
+                if box_found:
+                    box_found = False
+                    break
 
 
 def check_key_in_checkbox(key, cell_text):
