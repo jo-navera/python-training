@@ -77,7 +77,7 @@ def validate_record(record: PersonRecord) -> str:
         error_message = f"Invalid Birthdate: {record.birthdate}"
     if not record.role:
         error_message = "Role cannot be empty."
-    
+    #validate start date
     if not convert_date(record.hiredate) < convert_date(record.lastdate):
         error_message = "Start date is later than last date."
     return error_message
