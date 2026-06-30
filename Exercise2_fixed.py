@@ -6,6 +6,7 @@
 from pathlib import Path
 import argparse
 from ObjectFolder.Objects import PersonRecord
+from datetime import datetime
 
 def main():
     file = parse_arguments()
@@ -26,7 +27,7 @@ def process_line(line: str, line_number: int):
         print(f"Error on Line {line_number}: {error}")
     else:
         print(f"Line {line_number} is valid!")
-        print_record(record)
+    print_record(record)
 
 
 def parse_arguments():
@@ -51,6 +52,8 @@ def print_record(record: PersonRecord):
     print(f"Name: {record.first_name.strip()} {record.last_name.strip()}")
     print(f"Birthdate: {record.birthdate}")
     print(f"Role: {record.role}")
+    print(f"Start: {record.hiredate}")
+    print(f"End: {record.lastdate}")
 
 
 def parse_line(line: str) -> PersonRecord:
@@ -74,6 +77,9 @@ def validate_record(record: PersonRecord) -> str:
         error_message = f"Invalid Birthdate: {record.birthdate}"
     if not record.role:
         error_message = "Role cannot be empty."
+    
+    #if not datetime.strptime(record.hiredate) > datetime.strptime(record.lastdate):
+    #    error_message = "Start date is later than last date."
     return error_message
 
 
