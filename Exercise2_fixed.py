@@ -1,12 +1,11 @@
-#Feature 1: Add new validation for hiredate. It should be numerical and it should be 8 characters long. If not, return an error message "Invalid Hiredate: {hiredate}".
-#Feature 2: Add new validation for lastdate. It should be numerical and it should be 8 characters long. If not, return an error message "Invalid Lastdate: {lastdate}".
-#Feature 3: Add new validation for birthdate. Only 18 years old and above should be valid.
-#Feature 4: Add new validation to check last date should not be earlier than hire date.
+#Feature 1 (Dex): Add new validation for hiredate. It should be numerical and it should be 8 characters long. If not, return an error message "Invalid Hiredate: {hiredate}".
+#Feature 2 (Rachelle): Add new validation for lastdate. It should be numerical and it should be 8 characters long. If not, return an error message "Invalid Lastdate: {lastdate}".
+#Feature 3 (Roselyn): Add new validation for birthdate. Only 18 years old and above should be valid.
+#Feature 4 (Jayson): Add new validation to check last date should not be earlier than hire date.
 
 from pathlib import Path
 import argparse
 from ObjectFolder.Objects import PersonRecord
-from datetime import date
 
 def main():
     file = parse_arguments()
@@ -51,7 +50,7 @@ def print_record(record: PersonRecord):
     print(f"ID: {record.id}")
     print(f"Name: {record.first_name.strip()} {record.last_name.strip()}")
     print(f"Birthdate: {record.birthdate}")
-    #print(f"Role: {record.role}")
+    print(f"Role: {record.role}")
 
 
 def parse_line(line: str) -> PersonRecord:
@@ -60,7 +59,7 @@ def parse_line(line: str) -> PersonRecord:
         last_name=line[3:23],
         first_name=line[23:43],
         birthdate=line[44:52],
-        #role=line[52:62],
+        role=line[52:62],
         hiredate=line[62:70],
         lastdate=line[70:78]    
     )
@@ -80,8 +79,8 @@ def validate_record(record: PersonRecord) -> str:
         error_message = f"Invalid ID: {record.id}"
     if not record.birthdate.isdigit() or len(record.birthdate) != 8:
         error_message = f"Invalid Birthdate: {record.birthdate}"
-    if age < 18:
-        error_message = f"Invalid age: {age}"
+    if not record.role:
+        error_message = "Role cannot be empty."
     return error_message
 
 
