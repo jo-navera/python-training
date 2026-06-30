@@ -6,7 +6,7 @@
 from pathlib import Path
 import argparse
 from ObjectFolder.Objects import PersonRecord
-from datetime import datetime
+from datetime import date
 
 def main():
     file = parse_arguments()
@@ -71,6 +71,13 @@ def parse_line(line: str) -> PersonRecord:
 
 def validate_record(record: PersonRecord) -> str:
     error_message = ""
+    birthdate = date.strptime(record.birthdate, "%Y%m%d")
+    datetoday = date.today()
+    age = datetoday.year - birthdate.year
+    if (datetoday.month, datetoday.day) < (birthdate.month, birthdate.day):
+            age -= 1
+
+    print(f"Age: {age}")
     if not record.id.isdigit():
         error_message = f"Invalid ID: {record.id}"
     if not record.birthdate.isdigit() or len(record.birthdate) != 8:
@@ -80,11 +87,17 @@ def validate_record(record: PersonRecord) -> str:
     #validate start date
     if not convert_date(record.hiredate) < convert_date(record.lastdate):
         error_message = "Start date is later than last date."
+        # Feature 1 (Dex): Hiredate validation_30June
+    if not record.hiredate.isdigit() or len(record.hiredate) != 8:
+        error_message = f"Invalid Hiredate: {record.hiredate}"
     return error_message
 
+
 def convert_date(input_date):
-    converted_date = datetime.strptime(input_date, "%Y%m%d")
+    converted_date = date.strptime(input_date, "%Y%m%d")
     return converted_date
+
+    
 
 if __name__ == "__main__":
     main()
