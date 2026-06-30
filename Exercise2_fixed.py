@@ -78,10 +78,13 @@ def validate_record(record: PersonRecord) -> str:
     if not record.role:
         error_message = "Role cannot be empty."
     
-    #if not datetime.strptime(record.hiredate) > datetime.strptime(record.lastdate):
-    #    error_message = "Start date is later than last date."
+    if not convert_date(record.hiredate) < convert_date(record.lastdate):
+        error_message = "Start date is later than last date."
     return error_message
 
+def convert_date(input_date):
+    converted_date = datetime.strptime(input_date, "%Y%m%d")
+    return converted_date
 
 if __name__ == "__main__":
     main()
