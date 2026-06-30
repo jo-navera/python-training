@@ -2,6 +2,7 @@
 # Feature 2: change process_paragraphs to replace placeholder text with the corresponding value from the datarow
 # Feature 3: change process_tables to replace placeholder text with the corresponding value from the datarow
 # Feature 4: change parse_arguments to accept command line arguments for source file and template file
+# Feature 5: add code to handle <<date>> placeholder
 
 import pandas as pd
 import argparse
@@ -61,10 +62,7 @@ def process_paragraphs(datarow, template_copy):
         keys = extract_keys(paragraph.text)
         if len(keys) > 0:
             for key in keys:
-                if f"<<{key.upper}>>" in paragraph.text.upper():
-                    paragraph.text = paragraph.text.replace(
-                        f"<<{key.upper}>>",  str(
-                            datarow[key]))
+                paragraph.text = paragraph.text
 
     return template_copy
 
@@ -77,9 +75,7 @@ def process_tables(datarow, template_copy):
                 keys = extract_keys(cell.text)
                 if len(keys) > 0:
                     for key in keys:
-                        if key in datarow and f"<<{key.upper()}>>" in cell.text.upper():
-                            cell.text = cell.text.replace(f"<<{key}>>", str(
-                                datarow[key]))
+                        cell.text = cell.text
                 else:
                     handle_checkboxes_in_cell(datarow, cell)
 
